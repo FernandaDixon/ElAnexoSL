@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Anexo Stream Lab | Estudio de streaming y podcast en Tucumán</title>
+    <meta name="description" content="Estudio de streaming, podcast, fotografía y producción audiovisual en San Miguel de Tucumán. Operación técnica incluida. Reserva por WhatsApp.">
+    <meta property="og:title" content="El Anexo Stream Lab">
+    <meta property="og:description" content="Estudio de streaming, podcast, fotografía y producción audiovisual en San Miguel de Tucumán.">
+    <meta property="og:image" content="image_b5d429.png">
+    <link rel="icon" href="image_b5d429.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&family=Chivo:wght@300;400;500;700&family=Chivo+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0e0b;
+            --bg-2: #121510;
+            --panel: #161a14;
+            --line: rgba(255, 255, 255, 0.08);
+            --line-strong: rgba(255, 255, 255, 0.16);
+            --text: #e9ece6;
+            --muted: #9aa394;
+            --green: #39ff14;
+            --green-soft: rgba(57, 255, 20, 0.12);
+            --pink: #ff3df2;
+            --pink-soft: rgba(255, 61, 242, 0.12);
+            --display: 'Teko', sans-serif;
+            --body: 'Chivo', sans-serif;
+            --mono: 'Chivo Mono', monospace;
+            --radius: 14px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: 1rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Fondo: grilla técnica muy tenue + grano */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%);
+            opacity: 0.5;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+
+        /* Neón sutil, sin halos borrosos */
+        .neon-green { color: var(--green); text-shadow: 0 0 8px rgba(57, 255, 20, 0.2); }
+        .neon-pink { color: var(--pink); text-shadow: 0 0 8px rgba(255, 61, 242, 0.2); }
+
+        .eyebrow {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .eyebrow .num { color: var(--green); }
+        .eyebrow::after {
+            content: "";
+            width: 36px;
+            height: 1px;
+            background: var(--line-strong);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--display);
+            font-weight: 500;
+            line-height: 0.95;
+            letter-spacing: 0.01em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-top: 0.75rem; }
+        h3 { font-size: 1.5rem; }
+
+        .lede { color: var(--muted); max-width: 46ch; font-size: 1rem; }
+
+        /* Botones */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 999px;
+            font-family: var(--body);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .btn:active { transform: translateY(1px) scale(0.98); }
+        .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .btn-primary { background: var(--green); color: #0c0e0b; }
+        .btn-primary:hover { background: #6bff4f; }
+        .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+        .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+        .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 3px;
+        }
+
+        /* Navegación */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(12, 14, 11, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+        }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+        .brand { display: flex; align-items: center; gap: 0.65rem; }
+        .brand img { width: 38px; height: 38px; border-radius: 50%; }
+        .brand-text { font-family: var(--display); font-size: 1.5rem; line-height: 1; letter-spacing: 0.04em; }
+        .brand-text small { display: block; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--muted); }
+        .nav-links { display: flex; align-items: center; gap: 1.75rem; font-size: 0.875rem; color: var(--muted); }
+        .nav-links a:not(.btn) { position: relative; transition: color 0.2s; }
+        .nav-links a:not(.btn):hover { color: var(--text); }
+        .nav-links a:not(.btn)::after {
+            content: ""; position: absolute; left: 0; bottom: -4px; height: 1px; width: 100%;
+            background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease;
+        }
+        .nav-links a:not(.btn):hover::after { transform: scaleX(1); }
+        .nav-links .btn { padding: 0.55rem 1rem; color: #0c0e0b; }
+        .menu-toggle { display: none; background: none; border: 1px solid var(--line-strong); color: var(--text); border-radius: 10px; width: 42px; height: 42px; cursor: pointer; }
+        .menu-toggle svg { width: 20px; height: 20px; }
+
+        /* Hero */
+        .hero { padding: 4.5rem 0 3.5rem; }
+        .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3.5rem; align-items: center; }
+        .live-pill {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+            padding: 0.35rem 0.8rem; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted);
+        }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pink); animation: blink 1.6s ease-in-out infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+        .hero h1 { font-size: clamp(2.75rem, 6vw, 4.25rem); margin: 1.25rem 0 1.25rem; }
+        .hero h1 .line { display: block; }
+        .hero .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+        .facts { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 2.5rem; margin-top: 2.75rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+        .fact strong { display: block; font-family: var(--display); font-weight: 500; font-size: 1.75rem; line-height: 1; color: var(--text); }
+        .fact span { font-size: 0.8rem; color: var(--muted); }
+
+        /* Monitor "on air" */
+        .monitor {
+            position: relative;
+            aspect-ratio: 4 / 4.4;
+            border-radius: 22px;
+            background: radial-gradient(circle at 50% 45%, rgba(57, 255, 20, 0.08), transparent 60%), var(--panel);
+            border: 1px solid var(--line-strong);
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+        }
+        .monitor img { width: 62%; filter: saturate(0.95); }
+        .monitor .corner { position: absolute; width: 22px; height: 22px; border-color: rgba(255, 255, 255, 0.35); border-style: solid; }
+        .corner.tl { top: 18px; left: 18px; border-width: 1px 0 0 1px; }
+        .corner.tr { top: 18px; right: 18px; border-width: 1px 1px 0 0; }
+        .corner.bl { bottom: 18px; left: 18px; border-width: 0 0 1px 1px; }
+        .corner.br { bottom: 18px; right: 18px; border-width: 0 1px 1px 0; }
+        .hud { position: absolute; left: 50px; right: 50px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted); }
+        .hud.top { top: 20px; }
+        .hud.bottom { bottom: 20px; }
+        .rec { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text); }
+        .meter { display: flex; align-items: flex-end; gap: 3px; height: 14px; }
+        .meter i { width: 3px; background: var(--green); opacity: 0.7; border-radius: 1px; animation: level 1s ease-in-out infinite; transform-origin: bottom; }
+        .meter i:nth-child(1) { height: 60%; animation-delay: -0.2s; }
+        .meter i:nth-child(2) { height: 100%; animation-delay: -0.5s; }
+        .meter i:nth-child(3) { height: 40%; animation-delay: -0.1s; }
+        .meter i:nth-child(4) { height: 80%; animation-delay: -0.7s; }
+        .meter i:nth-child(5) { height: 55%; animation-delay: -0.35s; }
+        @keyframes level { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+        .scanline { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 3px); pointer-events: none; }
+
+        /* Ticker */
+        .ticker { border-block: 1px solid var(--line); background: var(--bg-2); overflow: hidden; white-space: nowrap; padding: 0.7rem 0; }
+        .ticker-track { display: inline-flex; animation: ticker 30s linear infinite; }
+        .ticker-track span { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.12em; color: var(--muted); padding: 0 1.5rem; display: inline-flex; align-items: center; gap: 3rem; }
+        .ticker-track span::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); opacity: 0.7; }
+        .ticker-track span:nth-child(even)::after { background: var(--pink); }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+
+        section { padding: 5.5rem 0; }
+        .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; margin-bottom: 3rem; }
+        .section-head .lede { justify-self: end; }
+
+        /* Servicios: grilla asimétrica */
+        .services { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+        .service {
+            position: relative;
+            padding: 1.75rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: var(--panel);
+            transition: border-color 0.25s ease, transform 0.25s ease;
+            overflow: hidden;
+        }
+        .service:hover { border-color: var(--line-strong); transform: translateY(-3px); }
+        .service:nth-child(1) { grid-column: span 4; }
+        .service:nth-child(2) { grid-column: span 2; }
+        .service:nth-child(3) { grid-column: span 2; }
+        .service:nth-child(4) { grid-column: span 4; }
+        .service .idx { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+        .service .icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; margin: 1.5rem 0 1.25rem; }
+        .service .icon svg { width: 20px; height: 20px; }
+        .service.g .icon { background: var(--green-soft); color: var(--green); }
+        .service.p .icon { background: var(--pink-soft); color: var(--pink); }
+        .service p { color: var(--muted); font-size: 0.9rem; margin: 0.5rem 0 0; max-width: 42ch; }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+        .tags span { font-family: var(--mono); font-size: 0.7rem; padding: 0.25rem 0.6rem; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--muted); }
+
+        /* Qué incluye */
+        .include { background: var(--bg-2); border-block: 1px solid var(--line); }
+        .include-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: start; }
+        .include-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+        .include-list li { display: grid; grid-template-columns: 44px 1fr; gap: 1rem; padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
+        .include-list .check { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(57, 255, 20, 0.35); display: grid; place-items: center; color: var(--green); }
+        .include-list .check svg { width: 15px; height: 15px; }
+        .include-list h3 { font-size: 1.35rem; }
+        .include-list p { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+        .quote { margin-top: 2rem; padding: 1.25rem 1.4rem; border-left: 2px solid var(--pink); background: var(--pink-soft); border-radius: 0 var(--radius) var(--radius) 0; font-family: var(--display); font-size: 1.5rem; line-height: 1.1; text-transform: uppercase; }
+
+        /* Pasos */
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; counter-reset: step; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+        .step { padding: 2rem 1.75rem; position: relative; background: var(--panel); }
+        .step + .step { border-left: 1px solid var(--line); }
+        .step-num { font-family: var(--display); font-size: 3rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(57, 255, 20, 0.6); }
+        .step h3 { margin-top: 1rem; font-size: 1.4rem; }
+        .step p { color: var(--muted); font-size: 0.9rem; margin: 0.4rem 0 0; }
+
+        /* Reserva */
+        .booking { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3.5rem; align-items: start; }
+        .form { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+        .field { display: grid; gap: 0.4rem; }
+        .field.full { grid-column: 1 / -1; }
+        .field label { font-size: 0.8rem; color: var(--muted); }
+        .field input, .field select, .field textarea {
+            width: 100%;
+            font: inherit;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: var(--bg);
+            border: 1px solid var(--line-strong);
+            border-radius: 10px;
+            padding: 0.7rem 0.85rem;
+            transition: border-color 0.2s;
+            color-scheme: dark;
+        }
+        .field textarea { resize: vertical; min-height: 96px; }
+        .field input:hover, .field select:hover, .field textarea:hover { border-color: rgba(255, 255, 255, 0.28); }
+        .field.invalid input, .field.invalid select { border-color: var(--pink); }
+        .field .error { font-size: 0.78rem; color: var(--pink); min-height: 0; display: none; }
+        .field.invalid .error { display: block; }
+        .form-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 0.5rem; }
+        .form-foot small { color: var(--muted); font-size: 0.8rem; max-width: 34ch; }
+        .wa-card { margin-top: 2rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); display: flex; gap: 1rem; align-items: center; }
+        .wa-card .ico { width: 44px; height: 44px; border-radius: 12px; background: var(--green-soft); color: var(--green); display: grid; place-items: center; flex-shrink: 0; }
+        .wa-card .ico svg { width: 22px; height: 22px; }
+        .wa-card span { display: block; font-size: 0.8rem; color: var(--muted); }
+        .wa-card a { font-family: var(--display); font-size: 1.75rem; line-height: 1; letter-spacing: 0.03em; }
+        .wa-card a:hover { color: var(--green); }
+
+        /* FAQ */
+        .faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3.5rem; }
+        .faq details { border-bottom: 1px solid var(--line); }
+        .faq details:first-child { border-top: 1px solid var(--line); }
+        .faq summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 0;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary .plus { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line-strong); position: relative; flex-shrink: 0; transition: transform 0.3s ease, border-color 0.3s; }
+        .faq summary .plus::before, .faq summary .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1px; background: var(--text); transform: translate(-50%, -50%); }
+        .faq summary .plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+        .faq details[open] summary .plus { transform: rotate(45deg); border-color: var(--green); }
+        .faq details p { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.92rem; max-width: 60ch; }
+
+        /* Contacto */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .contact-card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; }
+        .contact-card h2 { font-size: clamp(2rem, 4vw, 2.75rem); }
+        .info { display: grid; gap: 1.1rem; }
+        .info div { display: grid; grid-template-columns: 22px 1fr; gap: 0.8rem; align-items: start; font-size: 0.92rem; }
+        .info svg { width: 18px; height: 18px; color: var(--green); margin-top: 3px; }
+        .info span { color: var(--muted); display: block; font-size: 0.78rem; }
+        .map { border-radius: 20px; overflow: hidden; border: 1px solid var(--line); min-height: 340px; background: var(--panel); }
+        .map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; filter: grayscale(1) invert(0.9) contrast(0.9) brightness(0.95); }
+
+        footer { border-top: 1px solid var(--line); padding: 2rem 0; font-size: 0.82rem; color: var(--muted); }
+        footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; }
+
+        /* WhatsApp flotante */
+        .float-wa {
+            position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 40;
+            width: 54px; height: 54px; border-radius: 50%;
+            background: var(--green); color: #0c0e0b; display: grid; place-items: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+            transition: transform 0.2s ease;
+        }
+        .float-wa:hover { transform: scale(1.06); }
+        .float-wa svg { width: 26px; height: 26px; }
+
+        /* Animación de entrada */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        .hero .reveal { transition-delay: var(--d, 0s); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .reveal { opacity: 1; transform: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle { display: grid; place-items: center; }
+            .nav-links {
+                position: absolute; top: 68px; left: 0; right: 0;
+                flex-direction: column; align-items: flex-start; gap: 0;
+                background: var(--bg); border-bottom: 1px solid var(--line);
+                padding: 0.5rem 1.25rem 1.25rem;
+                display: none;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a:not(.btn) { padding: 0.8rem 0; width: 100%; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+            .nav-links a:not(.btn)::after { display: none; }
+            .nav-links .btn { margin-top: 1rem; }
+            .hero-grid, .include-grid, .booking, .faq-grid, .contact-grid, .section-head { grid-template-columns: 1fr; }
+            .section-head .lede { justify-self: start; }
+            .hero { padding-top: 3rem; }
+            .monitor { max-width: 420px; width: 100%; margin-inline: auto; }
+            .services { grid-template-columns: 1fr; }
+            .service:nth-child(n) { grid-column: auto; }
+            .steps { grid-template-columns: 1fr; }
+            .step + .step { border-left: 0; border-top: 1px solid var(--line); }
+            .include-grid, .booking, .faq-grid { gap: 2.5rem; }
+            section { padding: 4rem 0; }
+        }
+        @media (max-width: 560px) {
+            .form { grid-template-columns: 1fr; padding: 1.4rem; }
+            .facts { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <header class="nav">
+        <div class="wrap nav-inner">
+            <a href="#inicio" class="brand" aria-label="El Anexo Stream Lab, ir al inicio">
+                <img src="image_b5d429.png" alt="" width="38" height="38">
+                <span class="brand-text">EL ANEXO<small>STREAM LAB</small></span>
+            </a>
+            <nav id="menu" class="nav-links" aria-label="Principal">
+                <a href="#servicios">Servicios</a>
+                <a href="#estudio">El estudio</a>
+                <a href="#como-reservar">Cómo reservar</a>
+                <a href="#preguntas">Preguntas</a>
+                <a href="#contacto">Contacto</a>
+                <a href="#reservar" class="btn btn-primary">Reservar</a>
+            </nav>
+            <button class="menu-toggle" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <span class="live-pill reveal" style="--d:0s"><span class="dot"></span> Nuevo estudio en Tucumán</span>
+                    <h1 class="reveal" style="--d:.08s">
+                        <span class="line">Tu set de</span>
+                        <span class="line neon-pink">streaming</span>
+                        <span class="line">y creación <span class="neon-green">audiovisual</span></span>
+                    </h1>
+                    <p class="lede reveal" style="--d:.16s">Un espacio amplio, cómodo y moderno para grabar streams, podcasts, entrevistas y sesiones de fotos. Tú traes la idea; nuestro técnico se encarga del sonido, la imagen y la transmisión.</p>
+                    <div class="actions reveal" style="--d:.24s">
+                        <a href="#reservar" class="btn btn-primary">
+                            Reservar una sesión
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </a>
+                        <a href="#servicios" class="btn btn-ghost">Ver servicios</a>
+                    </div>
+                    <div class="facts reveal" style="--d:.32s">
+                        <div class="fact"><strong>8 a 23 h</strong><span>Horario de atención</span></div>
+                        <div class="fact"><strong>Técnico</strong><span>Incluido en tu sesión</span></div>
+                        <div class="fact"><strong>4 en 1</strong><span>Stream, podcast, foto y video</span></div>
+                    </div>
+                </div>
+
+                <div class="monitor reveal" style="--d:.2s" aria-hidden="true">
+                    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                    <div class="hud top">
+                        <span class="rec"><span class="dot"></span> EN VIVO</span>
+                        <span id="timecode">00:00:00:00</span>
+                    </div>
+                    <img src="image_b5d429.png" alt="">
+                    <div class="hud bottom">
+                        <span>CAM 01 · 1080p</span>
+                        <span class="meter"><i></i><i></i><i></i><i></i><i></i></span>
+                    </div>
+                    <div class="scanline"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticker -->
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker-track">
+                <span>STREAMING</span><span>PODCAST</span><span>FOTOGRAFÍA</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+                <span>STREAMING</span><span>PODCAST</span><span>FOTOGRAFÍA</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+            </div>
+        </div>
+
+        <!-- Servicios -->
+        <section id="servicios">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <span class="eyebrow"><span class="num">01</span> Servicios</span>
+                        <h2>Todo lo que necesitas,<br><span class="neon-green">en un solo lugar</span></h2>
+                    </div>
+                    <p class="lede">Elige el formato y nosotros preparamos el set. Cada sesión incluye operación técnica, así que solo tienes que preocuparte por tu contenido.</p>
+                </div>
+
+                <div class="services">
+                    <article class="service g reveal">
+                        <span class="idx">/01</span>
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4M10 9l4 2-4 2z"/></svg></div>
+                        <h3>Streaming en vivo</h3>
+                        <p>Sal al aire con tu programa, tu charla o tu evento. Nos ocupamos de la imagen, el audio y la conexión mientras tú hablas con tu audiencia.</p>
+                        <div class="tags"><span>Programas</span><span>Eventos</span><span>Charlas</span></div>
+                    </article>
+                    <article class="service p reveal">
+                        <span class="idx">/02</span>
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+                        <h3>Podcast</h3>
+                        <p>Graba tus episodios con sonido limpio y en video.</p>
+                    </article>
+                    <article class="service p reveal">
+                        <span class="idx">/03</span>
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></div>
+                        <h3>Fotografía</h3>
+                        <p>Sesiones de fotos para marcas, retratos y contenido para redes.</p>
+                    </article>
+                    <article class="service g reveal">
+                        <span class="idx">/04</span>
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 14l2 1.5 2-1.5v-3l-2 1.5-2-1.5z"/></svg></div>
+                        <h3>Producción audiovisual</h3>
+                        <p>Entrevistas, videos para redes y piezas para marcas. Te acompañamos desde la grabación hasta tener el material listo.</p>
+                        <div class="tags"><span>Entrevistas</span><span>Redes sociales</span><span>Marcas</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- El estudio -->
+        <section id="estudio" class="include">
+            <div class="wrap include-grid">
+                <div class="reveal">
+                    <span class="eyebrow"><span class="num">02</span> El estudio</span>
+                    <h2>Llegas, te sientas<br><span class="neon-pink">y empiezas a grabar</span></h2>
+                    <p class="lede" style="margin-top:1.25rem">El set ya está armado y probado cuando llegas. Sin cables que conectar ni configuraciones que revisar.</p>
+                    <div class="quote">Tu contenido merece <span class="neon-green">el mejor lugar</span></div>
+                </div>
+                <ul class="include-list reveal">
+                    <li>
+                        <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span>
+                        <div><h3>Técnico incluido</h3><p>Una persona del equipo opera el sonido, las cámaras y la transmisión durante toda tu sesión.</p></div>
+                    </li>
+                    <li>
+                        <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span>
+                        <div><h3>Equipos profesionales</h3><p>Cámaras, micrófonos e iluminación de gran calidad, listos para usar.</p></div>
+                    </li>
+                    <li>
+                        <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span>
+                        <div><h3>Espacio amplio y cómodo</h3><p>Un set moderno pensado para que tú y tus invitados se sientan a gusto frente a cámara.</p></div>
+                    </li>
+                    <li>
+                        <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span>
+                        <div><h3>Ideal para muchos formatos</h3><p>Streams, podcasts, entrevistas, sesiones de fotos y más.</p></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Cómo reservar -->
+        <section id="como-reservar">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <span class="eyebrow"><span class="num">03</span> Cómo reservar</span>
+                        <h2>Tres pasos<br><span class="neon-green">y sales al aire</span></h2>
+                    </div>
+                    <p class="lede">Reservar es simple: nos escribes, coordinamos los detalles y el día de la sesión el estudio te espera listo.</p>
+                </div>
+                <div class="steps reveal">
+                    <div class="step">
+                        <div class="step-num">01</div>
+                        <h3>Escríbenos</h3>
+                        <p>Cuéntanos por WhatsApp qué quieres grabar, o completa el formulario de abajo.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">02</div>
+                        <h3>Elige día y horario</h3>
+                        <p>Te confirmamos la disponibilidad y el presupuesto según el servicio y la duración.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">03</div>
+                        <h3>Ven a grabar</h3>
+                        <p>Llegas al estudio con el set listo y el técnico esperándote.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de reserva -->
+        <section id="reservar" class="include">
+            <div class="wrap booking">
+                <div class="reveal">
+                    <span class="eyebrow"><span class="num">04</span> Reservar</span>
+                    <h2>Arma tu<br><span class="neon-pink">reserva</span></h2>
+                    <p class="lede" style="margin-top:1.25rem">Completa los datos y te abrimos WhatsApp con el mensaje listo para enviar. Te respondemos para confirmar.</p>
+                    <div class="wa-card">
+                        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg></span>
+                        <div>
+                            <span>O escríbenos directamente</span>
+                            <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20reservar%20una%20sesi%C3%B3n%20en%20El%20Anexo%20Stream%20Lab." target="_blank" rel="noopener">381 510-9595</a>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="form reveal" id="booking-form" novalidate>
+                    <div class="field">
+                        <label for="f-name">Nombre</label>
+                        <input id="f-name" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" required>
+                        <span class="error">Escribe tu nombre.</span>
+                    </div>
+                    <div class="field">
+                        <label for="f-service">Servicio</label>
+                        <select id="f-service" name="servicio" required>
+                            <option value="">Elige un servicio</option>
+                            <option>Streaming en vivo</option>
+                            <option>Podcast</option>
+                            <option>Fotografía</option>
+                            <option>Producción audiovisual</option>
+                            <option>Otro / no estoy seguro</option>
+                        </select>
+                        <span class="error">Elige un servicio.</span>
+                    </div>
+                    <div class="field">
+                        <label for="f-date">Fecha</label>
+                        <input id="f-date" name="fecha" type="date" required>
+                        <span class="error">Elige una fecha a partir de hoy.</span>
+                    </div>
+                    <div class="field">
+                        <label for="f-time">Hora de inicio</label>
+                        <select id="f-time" name="hora" required>
+                            <option value="">Elige un horario</option>
+                        </select>
+                        <span class="error">Elige un horario.</span>
+                    </div>
+                    <div class="field full">
+                        <label for="f-msg">Cuéntanos tu proyecto <span style="opacity:.6">(opcional)</span></label>
+                        <textarea id="f-msg" name="mensaje" placeholder="Por ejemplo: podcast con 3 invitados, unas 2 horas, transmisión en YouTube."></textarea>
+                    </div>
+                    <div class="form-foot">
+                        <small>La reserva queda confirmada cuando te respondemos por WhatsApp.</small>
+                        <button type="submit" class="btn btn-primary">
+                            Enviar por WhatsApp
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Preguntas frecuentes -->
+        <section id="preguntas">
+            <div class="wrap faq-grid">
+                <div class="reveal">
+                    <span class="eyebrow"><span class="num">05</span> Preguntas</span>
+                    <h2>Preguntas<br><span class="neon-green">frecuentes</span></h2>
+                    <p class="lede" style="margin-top:1.25rem">¿No encuentras tu respuesta? <a href="https://wa.me/5493815109595" target="_blank" rel="noopener" class="neon-green">Escríbenos por WhatsApp</a>.</p>
+                </div>
+                <div class="faq reveal">
+                    <details>
+                        <summary>¿Necesito saber de técnica o traer equipos?<span class="plus"></span></summary>
+                        <p>No. La operación técnica está incluida: un técnico del estudio maneja el sonido, las cámaras y la transmisión. Solo trae tus ideas y a tus invitados.</p>
+                    </details>
+                    <details>
+                        <summary>¿Qué tipo de contenido puedo hacer?<span class="plus"></span></summary>
+                        <p>Streams en vivo, podcasts, entrevistas, sesiones de fotos y producciones audiovisuales para redes o marcas. Si tienes otro formato en mente, consúltanos.</p>
+                    </details>
+                    <details>
+                        <summary>¿En qué horario puedo reservar?<span class="plus"></span></summary>
+                        <p>Atendemos de 8:00 a 23:00 h. Elige el horario que prefieras en el formulario y te confirmamos la disponibilidad.</p>
+                    </details>
+                    <details>
+                        <summary>¿Cuánto cuesta una sesión?<span class="plus"></span></summary>
+                        <p>Depende del servicio y de la duración. Escríbenos con lo que quieres grabar y te enviamos un presupuesto.</p>
+                    </details>
+                    <details>
+                        <summary>¿Cómo reservo?<span class="plus"></span></summary>
+                        <p>Completa el formulario de reserva o escríbenos por WhatsApp al 381 510-9595. La reserva queda confirmada cuando te respondemos.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" style="padding-top:0">
+            <div class="wrap contact-grid">
+                <div class="contact-card reveal">
+                    <div>
+                        <span class="eyebrow"><span class="num">06</span> Contacto</span>
+                        <h2 style="margin-top:.75rem">Hablemos de<br><span class="neon-pink">tu próximo contenido</span></h2>
+                    </div>
+                    <div class="info">
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <p style="margin:0"><span>Ubicación</span>San Miguel de Tucumán, Argentina</p>
+                        </div>
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                            <p style="margin:0"><span>Horario</span>De 8:00 a 23:00 h</p>
+                        </div>
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></svg>
+                            <p style="margin:0"><span>WhatsApp</span><a href="https://wa.me/5493815109595" target="_blank" rel="noopener">381 510-9595</a></p>
+                        </div>
+                    </div>
+                    <div><a href="#reservar" class="btn btn-primary">Reservar una sesión</a></div>
+                </div>
+                <div class="map reveal">
+                    <iframe title="Mapa de San Miguel de Tucumán" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=San+Miguel+de+Tucum%C3%A1n,+Argentina&z=13&output=embed"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> El Anexo Stream Lab · San Miguel de Tucumán</span>
+            <span>Streaming · Podcast · Fotografía · Producción</span>
+        </div>
+    </footer>
+
+    <a class="float-wa" href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20reservar%20una%20sesi%C3%B3n%20en%20El%20Anexo%20Stream%20Lab." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg>
+    </a>
+
+    <script>
+        (function () {
+            const WA_NUMBER = '5493815109595';
+
+            // Menú móvil
+            const toggle = document.querySelector('.menu-toggle');
+            const menu = document.getElementById('menu');
+            toggle.addEventListener('click', () => {
+                const open = menu.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open);
+                toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+            });
+            menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                menu.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }));
+
+            // Animación al hacer scroll
+            const items = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver(entries => {
+                    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+                }, { threshold: 0.12 });
+                items.forEach(el => io.observe(el));
+            } else {
+                items.forEach(el => el.classList.add('in'));
+            }
+
+            // Timecode del monitor
+            const tc = document.getElementById('timecode');
+            const start = performance.now();
+            const pad = n => String(n).padStart(2, '0');
+            setInterval(() => {
+                const t = (performance.now() - start) / 1000;
+                const h = Math.floor(t / 3600), m = Math.floor(t / 60) % 60, s = Math.floor(t) % 60, f = Math.floor((t % 1) * 30);
+                tc.textContent = `${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)}`;
+            }, 1000 / 15);
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Formulario de reserva → WhatsApp
+            const form = document.getElementById('booking-form');
+            const date = document.getElementById('f-date');
+            const time = document.getElementById('f-time');
+            const today = new Date();
+            const iso = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+            date.min = iso;
+            for (let h = 8; h <= 22; h++) {
+                const opt = document.createElement('option');
+                opt.value = opt.textContent = `${pad(h)}:00`;
+                time.appendChild(opt);
+            }
+
+            const setInvalid = (el, bad) => el.closest('.field').classList.toggle('invalid', bad);
+            form.querySelectorAll('input, select').forEach(el => {
+                el.addEventListener('input', () => setInvalid(el, false));
+                el.addEventListener('change', () => setInvalid(el, false));
+            });
+
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const name = form.nombre.value.trim();
+                const service = form.servicio.value;
+                const day = form.fecha.value;
+                const hour = form.hora.value;
+                const msg = form.mensaje.value.trim();
+
+                const checks = [
+                    [form.nombre, !name],
+                    [form.servicio, !service],
+                    [form.fecha, !day || day < iso],
+                    [form.hora, !hour]
+                ];
+                checks.forEach(([el, bad]) => setInvalid(el, bad));
+                const firstBad = checks.find(([, bad]) => bad);
+                if (firstBad) { firstBad[0].focus(); return; }
+
+                const [y, mo, d] = day.split('-');
+                let text = `Hola, soy ${name}. Quiero reservar una sesión en El Anexo Stream Lab.\n` +
+                    `• Servicio: ${service}\n• Fecha: ${d}/${mo}/${y}\n• Hora de inicio: ${hour}`;
+                if (msg) text += `\n• Detalles: ${msg}`;
+                window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+            });
+        })();
+    </script>
+</body>
+</html>
