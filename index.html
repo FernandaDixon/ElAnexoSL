@@ -101,12 +101,12 @@
         .meter i:nth-child(5) { height: 55%; animation-delay: -0.35s; }
         @keyframes level { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
         .scanline { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 3px); pointer-events: none; z-index: 3; }
-        .ticker { border-block: 1px solid var(--line); background: var(--bg-2); overflow: hidden; white-space: nowrap; padding: 0.7rem 0; }
-        .ticker-track { display: inline-flex; animation: ticker 30s linear infinite; }
-        .ticker-track span { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.12em; color: var(--muted); padding: 0 1.5rem; display: inline-flex; align-items: center; gap: 3rem; }
+        .ticker { border-block: 1px solid var(--line); background: var(--bg-2); overflow: hidden; display: flex; padding: 0.7rem 0; user-select: none; }
+        .ticker-track { display: flex; flex-shrink: 0; align-items: center; white-space: nowrap; animation: ticker 28s linear infinite; will-change: transform; }
+        .ticker-track span { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.12em; color: var(--muted); padding: 0 1.5rem; display: inline-flex; align-items: center; gap: 3rem; flex-shrink: 0; }
         .ticker-track span::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); opacity: 0.7; }
         .ticker-track span:nth-child(even)::after { background: var(--pink); }
-        @keyframes ticker { to { transform: translateX(-50%); } }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         section { padding: 5.5rem 0; }
         .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; margin-bottom: 3rem; }
         .section-head .lede { justify-self: end; }
@@ -186,7 +186,12 @@
         .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .reveal.in { opacity: 1; transform: none; }
         .hero .reveal { transition-delay: var(--d, 0s); }
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
+        @media (prefers-reduced-motion: reduce) { 
+            *, *::before, *::after { animation: none !important; transition: none !important; } 
+            .ticker-track { animation: ticker 28s linear infinite !important; }
+            .reveal { opacity: 1; transform: none; } 
+            html { scroll-behavior: auto; } 
+        }
         @media (max-width: 900px) {
             .menu-toggle { display: grid; place-items: center; }
             .nav-links { position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 0.5rem 1.25rem 1.25rem; display: none; }
@@ -257,7 +262,18 @@
                 </div>
             </div>
         </div>
-        <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span><span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span></div></div>
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker-track">
+                <span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+                <span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+                <span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+            </div>
+            <div class="ticker-track" aria-hidden="true">
+                <span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+                <span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+                <span>STREAMING</span><span>PODCAST</span><span>PRODUCCIÓN</span><span>ENTREVISTAS</span>
+            </div>
+        </div>
         <section id="servicios">
             <div class="wrap">
                 <div class="section-head reveal"><div><span class="eyebrow"><span class="num">01</span> Servicios</span><h2>Todo lo que necesitás,<br><span class="neon-green">en un solo lugar</span></h2></div><p class="lede">Elegí el formato y nosotros preparamos el set. Cada sesión incluye operación técnica, así que vos solo tenés que preocuparte por tu contenido.</p></div>
@@ -322,7 +338,7 @@
                     </div>
                     <div><a href="#reservar" class="btn btn-primary">Reservá una sesión</a></div>
                 </div>
-                <div class="map reveal"><iframe title="Mapa de San Juan 1378, Planta Alta, San Miguel de Tucumán" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=San+Juan+1378+Planta+Alta%2C+T4000+San+Miguel+de+Tucum%C3%A1n%2C+Tucum%C3%A1n&z=17&output=embed"></iframe></div>
+                <div class="map reveal"><iframe title="Mapa de San Juan 1378, San Miguel de Tucumán" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=San+Juan+1378%2C+San+Miguel+de+Tucum%C3%A1n%2C+Tucum%C3%A1n&t=&z=17&ie=UTF8&iwloc=&output=embed"></iframe></div>
             </div>
         </section>
     </main>
