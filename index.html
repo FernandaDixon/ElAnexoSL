@@ -46,15 +46,16 @@
         h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 0.95; letter-spacing: 0.01em; margin: 0; text-transform: uppercase; }
         h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-top: 0.75rem; }
         h3 { font-size: 1.5rem; }
-        .lede { color: var(--muted); max-width: 46ch; font-size: 1rem; }
-        .btn { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.75rem 1.25rem; border-radius: 999px; font-family: var(--body); font-weight: 500; font-size: 0.9rem; border: 1px solid transparent; cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+        .lede { color: var(--muted); max-width: 52ch; font-size: 1rem; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; padding: 0.75rem 1.25rem; border-radius: 999px; font-family: var(--body); font-weight: 500; font-size: 0.9rem; border: 1px solid transparent; cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; text-align: center; }
         .btn:active { transform: translateY(1px) scale(0.98); }
         .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
         .btn-primary { background: var(--green); color: #0c0e0b; }
         .btn-primary:hover { background: #6bff4f; }
-        .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+        .btn-ghost { border-color: var(--line-strong); color: var(--text); background: transparent; }
         .btn-ghost:hover { border-color: var(--green); color: var(--green); }
         .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+        
         .nav { position: sticky; top: 0; z-index: 50; background: rgba(12, 14, 11, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
         .brand { display: flex; align-items: center; gap: 0.65rem; }
@@ -129,24 +130,197 @@
         .service p { color: var(--muted); font-size: 0.9rem; margin: 0.5rem 0 0; max-width: 42ch; }
         .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
         .tags span { font-family: var(--mono); font-size: 0.7rem; padding: 0.25rem 0.6rem; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--muted); }
-        .include { background: var(--bg-2); border-block: 1px solid var(--line); }
         
-        /* NUEVO: ESTILO SHOWCASE CINEMATOGRÁFICO PARA EL ESTUDIO */
-        .studio-showcase { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); min-height: 640px; display: flex; flex-direction: column; margin-top: 1rem; box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4); }
-        .studio-showcase video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .studio-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(12, 14, 11, 0.95) 0%, rgba(12, 14, 11, 0.25) 55%), linear-gradient(to top, rgba(12, 14, 11, 0.98) 0%, transparent 65%); z-index: 1; }
-        .studio-content { position: relative; z-index: 2; padding: 4rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-        .studio-badge { position: absolute; top: 2rem; right: 2rem; z-index: 3; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 0.85rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; }
-        .studio-header { max-width: 600px; margin-bottom: 2rem; }
-        .studio-header h2 { font-size: clamp(2.75rem, 5vw, 4.5rem); line-height: 0.95; margin: 1rem 0; text-transform: uppercase; font-family: var(--display); color: #fff; }
-        .studio-header p { color: #e9ece6; font-size: 1.05rem; max-width: 48ch; opacity: 0.85; margin: 0; }
-        .studio-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: auto; }
-        .studio-card { background: rgba(18, 21, 16, 0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 1.75rem; transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease; }
-        .studio-card:hover { border-color: var(--green); transform: translateY(-5px); background: rgba(18, 21, 16, 0.8); }
-        .studio-card .icon { width: 42px; height: 42px; border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: var(--green); display: grid; place-items: center; margin-bottom: 1.25rem; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .studio-card .icon svg { width: 22px; height: 22px; }
-        .studio-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; text-transform: none; font-weight: 600; font-family: var(--body); letter-spacing: 0; color: #fff; }
-        .studio-card p { font-size: 0.85rem; color: #9aa394; margin: 0; line-height: 1.5; }
+        /* SHOWCASE EL ESTUDIO */
+        .studio-showcase { 
+            position: relative; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            min-height: 640px; 
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); 
+        }
+        .studio-showcase video { 
+            position: absolute; 
+            inset: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+        .studio-overlay { 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(90deg, rgba(12, 14, 11, 0.85) 0%, rgba(12, 14, 11, 0.35) 45%, transparent 80%),
+                        linear-gradient(0deg, rgba(12, 14, 11, 0.95) 0%, rgba(12, 14, 11, 0.1) 60%); 
+            z-index: 1; 
+        }
+        .studio-content { 
+            position: relative; 
+            z-index: 2; 
+            padding: 4rem; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            flex-grow: 1; 
+        }
+        .studio-badge { 
+            position: absolute; 
+            top: 2.5rem; 
+            right: 2.5rem; 
+            z-index: 3; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            font-family: var(--mono); 
+            font-size: 0.65rem; 
+            letter-spacing: 0.12em; 
+            text-transform: uppercase; 
+            padding: 0.45rem 0.85rem; 
+            border-radius: 999px; 
+            background: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            color: #fff; 
+        }
+        .studio-header { max-width: 650px; }
+        .studio-header h2 { 
+            font-family: var(--body);
+            font-size: clamp(2.3rem, 4.5vw, 3.8rem); 
+            line-height: 1.05; 
+            margin: 1.25rem 0; 
+            text-transform: none; 
+            font-weight: 700; 
+            letter-spacing: -0.03em;
+            color: #fff; 
+        }
+        .studio-header p { 
+            color: #e9ece6; 
+            font-size: 1.05rem; 
+            max-width: 48ch; 
+            opacity: 0.9; 
+            margin: 0; 
+            line-height: 1.6;
+        }
+        .studio-cards { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 1.25rem; 
+            margin-top: 5rem;
+        }
+        .studio-card { 
+            background: rgba(18, 21, 16, 0.65); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-top: 1px solid rgba(57, 255, 20, 0.25); 
+            border-radius: 16px; 
+            padding: 1.5rem; 
+            transition: transform 0.25s ease, background 0.25s ease; 
+        }
+        .studio-card:hover { 
+            transform: translateY(-5px); 
+            background: rgba(18, 21, 16, 0.85); 
+        }
+        .studio-card .icon { 
+            width: 38px; 
+            height: 38px; 
+            border-radius: 8px; 
+            background: rgba(57, 255, 20, 0.1); 
+            color: var(--green); 
+            display: grid; 
+            place-items: center; 
+            margin-bottom: 1.1rem; 
+        }
+        .studio-card .icon svg { width: 20px; height: 20px; }
+        .studio-card h3 { 
+            font-size: 1.05rem; 
+            margin-bottom: 0.5rem; 
+            text-transform: none; 
+            font-weight: 600; 
+            font-family: var(--body); 
+            letter-spacing: 0; 
+            color: #fff; 
+        }
+        .studio-card p { 
+            font-size: 0.82rem; 
+            color: #9aa394; 
+            margin: 0; 
+            line-height: 1.5; 
+        }
+
+        /* SECCIÓN ABONOS MENSUALES */
+        .abonos-section { background: var(--bg-2); border-block: 1px solid var(--line); }
+        .pricing-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 1.25rem; 
+            margin-top: 3.5rem; 
+        }
+        .pricing-card { 
+            position: relative; 
+            background: var(--panel); 
+            border: 1px solid var(--line); 
+            border-radius: 20px; 
+            padding: 2.25rem 1.6rem 1.75rem; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease; 
+        }
+        .pricing-card:hover { 
+            transform: translateY(-8px); 
+            border-color: rgba(57, 255, 20, 0.4); 
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(57, 255, 20, 0.12); 
+        }
+        .pricing-card.featured { 
+            border-color: rgba(255, 255, 255, 0.25); 
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, var(--panel) 100%); 
+        }
+        .pricing-card.featured:hover { 
+            border-color: var(--green); 
+        }
+        .pricing-badge { 
+            position: absolute; 
+            top: -12px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            font-family: var(--mono); 
+            font-size: 0.68rem; 
+            font-weight: 700; 
+            letter-spacing: 0.1em; 
+            text-transform: uppercase; 
+            padding: 0.3rem 0.85rem; 
+            border-radius: 999px; 
+            white-space: nowrap; 
+        }
+        .pricing-badge.white { 
+            background: #ffffff; 
+            color: #0c0e0b; 
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); 
+            animation: pulse-soft 2.5s infinite; 
+        }
+        .pricing-badge.silver { 
+            background: #8b9588; 
+            color: #0c0e0b; 
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.04); }
+        }
+        .pricing-header { text-align: center; border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+        .pricing-val { display: flex; align-items: baseline; justify-content: center; gap: 0.25rem; }
+        .pricing-val strong { font-family: var(--body); font-size: 3.5rem; font-weight: 700; line-height: 1; color: var(--text); }
+        .pricing-val span { font-family: var(--mono); font-size: 0.95rem; color: var(--muted); }
+        .pricing-sub { font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; }
+        .pricing-features { list-style: none; padding: 0; margin: 0 0 2rem; display: grid; gap: 0.85rem; font-size: 0.875rem; color: #cfd6cb; }
+        .pricing-features li { display: flex; align-items: center; gap: 0.65rem; }
+        .pricing-features svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; }
+        .pricing-btn { width: 100%; font-size: 0.9rem; padding: 0.7rem 1rem; }
 
         .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; counter-reset: step; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
         .step { padding: 2rem 1.75rem; position: relative; background: var(--panel); }
@@ -155,6 +329,7 @@
         .step h3 { margin-top: 1rem; font-size: 1.4rem; }
         .step p { color: var(--muted); font-size: 0.9rem; margin: 0.4rem 0 0; }
         
+        .include { background: var(--bg-2); border-block: 1px solid var(--line); }
         .booking { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3.5rem; align-items: start; }
         .form { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
         .field { display: grid; gap: 0.4rem; }
@@ -213,6 +388,10 @@
             .reveal { opacity: 1; transform: none; } 
             html { scroll-behavior: auto; } 
         }
+        @media (max-width: 990px) {
+            .pricing-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.25rem; }
+            .studio-cards { grid-template-columns: 1fr 1fr; margin-top: 3rem; }
+        }
         @media (max-width: 900px) {
             .menu-toggle { display: grid; place-items: center; }
             .nav-links { position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 0.5rem 1.25rem 1.25rem; display: none; }
@@ -231,15 +410,16 @@
             .booking, .faq-grid { gap: 2.5rem; }
             section { padding: 4rem 0; }
             
-            .studio-badge { top: 1.2rem; right: 1.2rem; }
+            .studio-badge { top: 1.5rem; right: 1.5rem; }
             .studio-content { padding: 2.5rem; }
-            .studio-cards { grid-template-columns: 1fr 1fr; margin-top: 2rem; }
         }
-        @media (max-width: 560px) { 
+        @media (max-width: 580px) { 
+            .pricing-grid { grid-template-columns: 1fr; gap: 2.25rem; }
             .form { grid-template-columns: 1fr; padding: 1.4rem; } 
             .facts { grid-template-columns: 1fr 1fr; gap: 1.5rem; } 
             .studio-content { padding: 1.5rem; }
             .studio-cards { grid-template-columns: 1fr; }
+            .studio-header h2 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -253,6 +433,7 @@
             <nav id="menu" class="nav-links" aria-label="Principal">
                 <a href="#servicios">Servicios</a>
                 <a href="#estudio">El estudio</a>
+                <a href="#abonos">Abonos</a>
                 <a href="#como-reservar">Cómo reservar</a>
                 <a href="#preguntas">Preguntas</a>
                 <a href="#contacto">Contacto</a>
@@ -332,10 +513,10 @@
             </div>
         </section>
         
-        <section id="estudio">
+        <section id="estudio" style="padding-top: 2rem;">
             <div class="wrap">
                 <div class="studio-showcase reveal">
-                    <span class="studio-badge"><span class="dot" style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;"></span> BROADCAST READY</span>
+                    <span class="studio-badge"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;"></span> BROADCAST READY</span>
                     <video autoplay loop muted playsinline preload="metadata">
                         <source src="estudio.mp4" type="video/mp4">
                         Tu navegador no soporta video HTML5.
@@ -343,9 +524,9 @@
                     <div class="studio-overlay"></div>
                     <div class="studio-content">
                         <div class="studio-header">
-                            <span class="eyebrow" style="margin-bottom: 1rem;"><span class="num">02</span> El estudio</span>
-                            <h2>Llegás, te sentás<br><span class="neon-pink">y empezás a grabar</span></h2>
-                            <p>El set ya está armado y probado cuando llegás. Sin cables que conectar ni configuraciones complejas que revisar. Tu contenido merece un marco perfecto.</p>
+                            <span class="eyebrow" style="margin-bottom: 1.5rem;"><span class="num">02</span> Sobre el estudio</span>
+                            <h2>Llegás, te sentás <br>y <span class="neon-pink">empezás a grabar</span></h2>
+                            <p>El set ya está armado y probado cuando llegás. Sin cables que conectar ni configuraciones que revisar. Tu contenido merece el mejor lugar.</p>
                         </div>
                         
                         <div class="studio-cards">
@@ -354,30 +535,127 @@
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
                                 </div>
                                 <h3>Equipos profesionales</h3>
-                                <p>Cámaras, micrófonos e iluminación de gran calidad, conectados y listos para salir al aire con imagen limpia.</p>
+                                <p>Cámaras, micrófonos e iluminación de gran calidad, preparados para imagen limpia y sonido claro.</p>
                             </div>
                             <div class="studio-card">
                                 <div class="icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                                 </div>
                                 <h3>Espacio confortable</h3>
-                                <p>Un set moderno pensado para que vos y tus invitados tengan foco y se sientan a gusto frente a cámara.</p>
+                                <p>Un set moderno pensado para que vos y tus invitados tengan foco y agilidad en cada grabación.</p>
                             </div>
                             <div class="studio-card">
                                 <div class="icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
                                 </div>
                                 <h3>Técnico incluido</h3>
-                                <p>Nuestro equipo opera el sonido, las cámaras y la transmisión para que te concentres solo en tu mensaje.</p>
+                                <p>Operación técnica completa para que te concentres únicamente en tu mensaje.</p>
                             </div>
                             <div class="studio-card">
                                 <div class="icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                 </div>
-                                <h3>Formatos versátiles</h3>
-                                <p>Estructura adaptada para aumentar el impacto estratégico en streams, podcasts o entrevistas corporativas.</p>
+                                <h3>Impacto estratégico</h3>
+                                <p>Calidad técnica que eleva el valor de tu marca y la autoridad de tu contenido.</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 03: ABONOS MENSUALES -->
+        <section id="abonos" class="abonos-section">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <span class="eyebrow"><span class="num">03</span> Abonos Mensuales</span>
+                        <h2>Día y Horario <span class="neon-green">Fijo</span></h2>
+                    </div>
+                    <p class="lede">Incorporá las grabaciones a tu rutina semanal. Reservás un día y horario fijo que queda bloqueado exclusivamente para vos durante todo el año. Ideal para quienes buscan sistematizar su producción de contenido.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- Tarjeta 1: 4 hs/mes -->
+                    <div class="pricing-card reveal" style="--d:0s">
+                        <div>
+                            <div class="pricing-header">
+                                <div class="pricing-val">
+                                    <strong>4</strong>
+                                    <span>hs/mes</span>
+                                </div>
+                                <div class="pricing-sub">1 hora semanal</div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Constancia asegurada</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20abono%20mensual%20de%204%20hs%2Fmes%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-ghost pricing-btn">Pedir presupuesto</a>
+                    </div>
+
+                    <!-- Tarjeta 2: 6 hs/mes -->
+                    <div class="pricing-card reveal" style="--d:.08s">
+                        <div>
+                            <div class="pricing-header">
+                                <div class="pricing-val">
+                                    <strong>6</strong>
+                                    <span>hs/mes</span>
+                                </div>
+                                <div class="pricing-sub">Hora y media por semana</div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Mejor precio por hora</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20abono%20mensual%20de%206%20hs%2Fmes%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-ghost pricing-btn">Pedir presupuesto</a>
+                    </div>
+
+                    <!-- Tarjeta 3: 8 hs/mes (Más elegido) -->
+                    <div class="pricing-card featured reveal" style="--d:.16s">
+                        <span class="pricing-badge white">MÁS ELEGIDO</span>
+                        <div>
+                            <div class="pricing-header">
+                                <div class="pricing-val">
+                                    <strong>8</strong>
+                                    <span>hs/mes</span>
+                                </div>
+                                <div class="pricing-sub">2 horas semanales</div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Gran descuento mensual</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20abono%20mensual%20de%208%20hs%2Fmes%20(M%C3%A1s%20elegido)%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-primary pricing-btn">Pedir presupuesto</a>
+                    </div>
+
+                    <!-- Tarjeta 4: 12 hs/mes (Máximo ahorro) -->
+                    <div class="pricing-card reveal" style="--d:.24s">
+                        <span class="pricing-badge silver">MÁXIMO AHORRO</span>
+                        <div>
+                            <div class="pricing-header">
+                                <div class="pricing-val">
+                                    <strong>12</strong>
+                                    <span>hs/mes</span>
+                                </div>
+                                <div class="pricing-sub">3 horas semanales</div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>El mayor descuento disponible</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20abono%20mensual%20de%2012%20hs%2Fmes%20(M%C3%A1ximo%20ahorro)%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-ghost pricing-btn">Pedir presupuesto</a>
                     </div>
                 </div>
             </div>
@@ -385,20 +663,20 @@
         
         <section id="como-reservar">
             <div class="wrap">
-                <div class="section-head reveal"><div><span class="eyebrow"><span class="num">03</span> Cómo reservar</span><h2>Tres pasos<br><span class="neon-green">y salís al aire</span></h2></div><p class="lede">Reservar es simple: nos escribís, coordinamos los detalles y el día de la sesión te esperamos con el estudio listo.</p></div>
+                <div class="section-head reveal"><div><span class="eyebrow"><span class="num">04</span> Cómo reservar</span><h2>Tres pasos<br><span class="neon-green">y salís al aire</span></h2></div><p class="lede">Reservar es simple: nos escribís, coordinamos los detalles y el día de la sesión te esperamos con el estudio listo.</p></div>
                 <div class="steps reveal"><div class="step"><div class="step-num">01</div><h3>Escribinos</h3><p>Contanos por WhatsApp qué querés grabar o completá el formulario de abajo.</p></div><div class="step"><div class="step-num">02</div><h3>Elegí día y horario</h3><p>Te confirmamos la disponibilidad y el presupuesto según el servicio y la duración.</p></div><div class="step"><div class="step-num">03</div><h3>Vení a grabar</h3><p>Vení al estudio: te esperamos con el set listo y el técnico preparado.</p></div></div>
             </div>
         </section>
         
         <section id="reservar" class="include">
             <div class="wrap booking">
-                <div class="reveal"><span class="eyebrow"><span class="num">04</span> Reservá</span><h2>Armá tu<br><span class="neon-pink">reserva</span></h2><p class="lede" style="margin-top:1.25rem">Completá los datos y te abrimos WhatsApp con el mensaje listo para enviar. Te respondemos para confirmar.</p><div class="wa-card"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg></span><div><span>O escribinos directamente</span><a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20reservar%20una%20sesi%C3%B3n%20en%20El%20Anexo%20Stream%20Lab." target="_blank" rel="noopener">381 510-9595</a></div></div></div>
+                <div class="reveal"><span class="eyebrow"><span class="num">05</span> Reservá</span><h2>Armá tu<br><span class="neon-pink">reserva</span></h2><p class="lede" style="margin-top:1.25rem">Completá los datos y te abrimos WhatsApp con el mensaje listo para enviar. Te respondemos para confirmar.</p><div class="wa-card"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg></span><div><span>O escribinos directamente</span><a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20reservar%20una%20sesi%C3%B3n%20en%20El%20Anexo%20Stream%20Lab." target="_blank" rel="noopener">381 510-9595</a></div></div></div>
                 <form class="form reveal" id="booking-form" novalidate>
                     <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" required><span class="error">Escribí tu nombre.</span></div>
-                    <div class="field"><label for="f-service">Servicio</label><select id="f-service" name="servicio" required><option value="">Elegí un servicio</option><option>Streaming en vivo</option><option>Podcast</option><option>Lounge & Quincho</option><option>Producción audiovisual</option><option>Otro / no estoy seguro/a</option></select><span class="error">Elegí un servicio.</span></div>
+                    <div class="field"><label for="f-service">Servicio</label><select id="f-service" name="servicio" required><option value="">Elegí un servicio</option><option>Streaming en vivo</option><option>Podcast</option><option>Lounge & Quincho</option><option>Abono mensual</option><option>Producción audiovisual</option><option>Otro / no estoy seguro/a</option></select><span class="error">Elegí un servicio.</span></div>
                     <div class="field"><label for="f-date">Fecha</label><input id="f-date" name="fecha" type="date" required><span class="error">Elegí una fecha a partir de hoy.</span></div>
                     <div class="field"><label for="f-time">Hora de inicio</label><select id="f-time" name="hora" required><option value="">Elegí un horario</option></select><span class="error">Elegí un horario.</span></div>
-                    <div class="field full"><label for="f-msg">Contanos sobre tu proyecto <span style="opacity:.6">(opcional)</span></label><textarea id="f-msg" name="mensaje" placeholder="Por ejemplo: podcast con 3 invitados, unas 2 horas, transmisión en YouTube."></textarea></div>
+                    <div class="field full"><label for="f-msg">Contanos sobre tu proyecto <span style="opacity:.6">(opcional)</span></label><textarea id="f-msg" name="mensaje" placeholder="Por ejemplo: abono de 8 hs/mes, podcast con 3 invitados, transmisión en YouTube."></textarea></div>
                     <div class="form-foot"><small>La reserva queda confirmada cuando te respondemos por WhatsApp.</small><button type="submit" class="btn btn-primary">Mandar por WhatsApp<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
                 </form>
             </div>
@@ -406,11 +684,12 @@
         
         <section id="preguntas">
             <div class="wrap faq-grid">
-                <div class="reveal"><span class="eyebrow"><span class="num">05</span> Preguntas</span><h2>Preguntas<br><span class="neon-green">frecuentes</span></h2><p class="lede" style="margin-top:1.25rem">¿No encontrás tu respuesta? <a href="https://wa.me/5493815109595" target="_blank" rel="noopener" class="neon-green">Escribinos por WhatsApp</a>.</p></div>
+                <div class="reveal"><span class="eyebrow"><span class="num">06</span> Preguntas</span><h2>Preguntas<br><span class="neon-green">frecuentes</span></h2><p class="lede" style="margin-top:1.25rem">¿No encontrás tu respuesta? <a href="https://wa.me/5493815109595" target="_blank" rel="noopener" class="neon-green">Escribinos por WhatsApp</a>.</p></div>
                 <div class="faq reveal">
                     <details><summary>¿Necesitás saber de técnica o traer equipos?<span class="plus"></span></summary><p>No. La operación técnica está incluida: un técnico del estudio maneja el sonido, las cámaras y la transmisión. Solo traé tus ideas y a tus invitados.</p></details>
                     <details><summary>¿Qué tipo de contenido podés hacer?<span class="plus"></span></summary><p>Streams en vivo, podcasts, entrevistas y producciones audiovisuales para redes o marcas. Si tenés otro formato en mente, consultanos.</p></details>
                     <details><summary>¿En qué horario podés reservar?<span class="plus"></span></summary><p>Atendemos de 8:00 a 23:00 h. Elegí el horario que prefieras en el formulario y te confirmamos la disponibilidad.</p></details>
+                    <details><summary>¿Cómo funcionan los abonos mensuales?<span class="plus"></span></summary><p>Contratás una cantidad de horas fijas al mes (4, 6, 8 o 12 hs) y te aseguramos un día y horario recurrente durante todo el período para que tu producción no se interrumpa.</p></details>
                     <details><summary>¿Cuánto cuesta una sesión?<span class="plus"></span></summary><p>Depende del servicio y de la duración. Escribinos con lo que querés grabar y te mandamos un presupuesto.</p></details>
                     <details><summary>¿Cómo reservo?<span class="plus"></span></summary><p>Completá el formulario o escribinos por WhatsApp al 381 510-9595. La reserva queda confirmada cuando te respondemos.</p></details>
                 </div>
@@ -420,7 +699,7 @@
         <section id="contacto" style="padding-top:0">
             <div class="wrap contact-grid">
                 <div class="contact-card reveal">
-                    <div><span class="eyebrow"><span class="num">06</span> Contacto</span><h2 style="margin-top:.75rem">Hablemos de<br><span class="neon-pink">tu próximo contenido</span></h2></div>
+                    <div><span class="eyebrow"><span class="num">07</span> Contacto</span><h2 style="margin-top:.75rem">Hablemos de<br><span class="neon-pink">tu próximo contenido</span></h2></div>
                     <div class="info">
                         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><p style="margin:0"><span>Dirección</span>San Juan 1378, Planta Alta<br>T4000 San Miguel de Tucumán, Tucumán</p></div>
                         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p style="margin:0"><span>Horario</span>De 8:00 a 23:00 h</p></div>
