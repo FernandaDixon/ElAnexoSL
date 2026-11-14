@@ -252,12 +252,12 @@
             line-height: 1.5; 
         }
 
-        /* SECCIÓN PRESUPUESTOS Y PLANES */
+        /* SECCIÓN PRESUPUESTOS Y PLANES (Actualizado a 3 columnas) */
         .abonos-section { background: var(--bg-2); border-block: 1px solid var(--line); }
         .pricing-grid { 
             display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 1.25rem; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.5rem; 
             margin-top: 3.5rem; 
         }
         .pricing-card { 
@@ -265,7 +265,7 @@
             background: var(--panel); 
             border: 1px solid var(--line); 
             border-radius: 20px; 
-            padding: 2.25rem 1.6rem 1.75rem; 
+            padding: 2.5rem 2rem 2rem; 
             display: flex; 
             flex-direction: column; 
             justify-content: space-between; 
@@ -311,15 +311,15 @@
             0%, 100% { transform: translateX(-50%) scale(1); }
             50% { transform: translateX(-50%) scale(1.04); }
         }
-        .pricing-header { text-align: center; border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+        .pricing-header { text-align: center; border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; margin-bottom: 1.75rem; }
         .pricing-val { display: flex; align-items: baseline; justify-content: center; gap: 0.25rem; }
-        .pricing-val strong { font-family: var(--body); font-size: 3.5rem; font-weight: 700; line-height: 1; color: var(--text); }
-        .pricing-val span { font-family: var(--mono); font-size: 0.95rem; color: var(--muted); }
-        .pricing-sub { font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; }
-        .pricing-features { list-style: none; padding: 0; margin: 0 0 2rem; display: grid; gap: 0.85rem; font-size: 0.875rem; color: #cfd6cb; }
-        .pricing-features li { display: flex; align-items: center; gap: 0.65rem; }
-        .pricing-features svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; }
-        .pricing-btn { width: 100%; font-size: 0.9rem; padding: 0.7rem 1rem; }
+        .pricing-val strong { font-family: var(--body); font-size: 4rem; font-weight: 700; line-height: 1; color: var(--text); }
+        .pricing-val span { font-family: var(--mono); font-size: 1rem; color: var(--muted); }
+        .pricing-sub { font-size: 0.95rem; color: var(--muted); margin-top: 0.4rem; }
+        .pricing-features { list-style: none; padding: 0; margin: 0 0 2.5rem; display: grid; gap: 1rem; font-size: 0.9rem; color: #cfd6cb; }
+        .pricing-features li { display: flex; align-items: center; gap: 0.75rem; }
+        .pricing-features svg { width: 16px; height: 16px; color: var(--green); flex-shrink: 0; }
+        .pricing-btn { width: 100%; font-size: 0.95rem; padding: 0.8rem 1rem; }
 
         .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; counter-reset: step; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
         .step { padding: 2rem 1.75rem; position: relative; background: var(--panel); }
@@ -387,9 +387,8 @@
             .reveal { opacity: 1; transform: none; } 
             html { scroll-behavior: auto; } 
         }
-        @media (max-width: 990px) {
+        @media (max-width: 1024px) {
             .pricing-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.25rem; }
-            .studio-cards { grid-template-columns: 1fr 1fr; margin-top: 3rem; }
         }
         @media (max-width: 900px) {
             .menu-toggle { display: grid; place-items: center; }
@@ -411,6 +410,7 @@
             
             .studio-badge { top: 1.5rem; right: 1.5rem; }
             .studio-content { padding: 2.5rem; }
+            .studio-cards { grid-template-columns: 1fr 1fr; margin-top: 3rem; }
         }
         @media (max-width: 580px) { 
             .pricing-grid { grid-template-columns: 1fr; gap: 2.25rem; }
@@ -586,38 +586,18 @@
                                 <div class="pricing-sub">1 hora semanal</div>
                             </div>
                             <ul class="pricing-features">
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Constancia asegurada[cite: 3]</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operación técnica</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Constancia asegurada</li>
                             </ul>
                         </div>
                         <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20plan%20de%204%20hs%20fijas%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-ghost pricing-btn">Pedir presupuesto</a>
                     </div>
 
-                    <!-- Tarjeta 2: 6 hs -->
-                    <div class="pricing-card reveal" style="--d:.08s">
-                        <div>
-                            <div class="pricing-header">
-                                <div class="pricing-val">
-                                    <strong>6</strong>
-                                    <span>hs</span>
-                                </div>
-                                <div class="pricing-sub">Hora y media por semana</div>
-                            </div>
-                            <ul class="pricing-features">
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Mejor precio por hora[cite: 3]</li>
-                            </ul>
-                        </div>
-                        <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20plan%20de%206%20hs%20fijas%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-ghost pricing-btn">Pedir presupuesto</a>
-                    </div>
-
-                    <!-- Tarjeta 3: 8 hs (Más elegido) -->
-                    <div class="pricing-card featured reveal" style="--d:.16s">
-                        <span class="pricing-badge white">MÁS ELEGIDO[cite: 3]</span>
+                    <!-- Tarjeta 2: 8 hs (Más elegido) -->
+                    <div class="pricing-card featured reveal" style="--d:.08s">
+                        <span class="pricing-badge white">MÁS ELEGIDO</span>
                         <div>
                             <div class="pricing-header">
                                 <div class="pricing-val">
@@ -627,18 +607,18 @@
                                 <div class="pricing-sub">2 horas semanales</div>
                             </div>
                             <ul class="pricing-features">
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado[cite: 3]</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operación técnica</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado</li>
                                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Gran descuento bonificado</li>
                             </ul>
                         </div>
                         <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20plan%20de%208%20hs%20(M%C3%A1s%20elegido)%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-primary pricing-btn">Pedir presupuesto</a>
                     </div>
 
-                    <!-- Tarjeta 4: 12 hs (Máximo ahorro) -->
-                    <div class="pricing-card reveal" style="--d:.24s">
-                        <span class="pricing-badge silver">MÁXIMO AHORRO[cite: 3]</span>
+                    <!-- Tarjeta 3: 12 hs (Máximo ahorro) -->
+                    <div class="pricing-card reveal" style="--d:.16s">
+                        <span class="pricing-badge silver">MÁXIMO AHORRO</span>
                         <div>
                             <div class="pricing-header">
                                 <div class="pricing-val">
@@ -648,10 +628,10 @@
                                 <div class="pricing-sub">3 horas semanales</div>
                             </div>
                             <ul class="pricing-features">
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operador técnico[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado[cite: 3]</li>
-                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>El mayor descuento disponible[cite: 3]</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Día y horario fijo garantizado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Estudio + operación técnica</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contenido ponchado y terminado</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>El mayor descuento disponible</li>
                             </ul>
                         </div>
                         <a href="https://wa.me/5493815109595?text=Hola%2C%20quiero%20pedir%20presupuesto%20por%20el%20plan%20de%2012%20hs%20(M%C3%A1ximo%20ahorro)%20en%20El%20Anexo." target="_blank" rel="noopener" class="btn btn-ghost pricing-btn">Pedir presupuesto</a>
@@ -688,7 +668,7 @@
                     <details><summary>¿Necesitás saber de técnica o traer equipos?<span class="plus"></span></summary><p>No. La operación técnica está incluida: un técnico del estudio maneja el sonido, las cámaras y la transmisión. Solo traé tus ideas y a tus invitados.</p></details>
                     <details><summary>¿Qué tipo de contenido podés hacer?<span class="plus"></span></summary><p>Streams en vivo, podcasts, entrevistas y producciones audiovisuales para redes o marcas. Si tenés otro formato en mente, consultanos.</p></details>
                     <details><summary>¿En qué horario podés reservar?<span class="plus"></span></summary><p>Atendemos de 8:00 a 23:00 h. Elegí el horario que prefieras en el formulario y te confirmamos la disponibilidad.</p></details>
-                    <details><summary>¿Cómo funcionan los presupuestos con horario fijo?<span class="plus"></span></summary><p>Elegís la cantidad de horas fijas que necesitás (4, 6, 8 o 12 hs) y te aseguramos un día y horario recurrente durante el período pactado para que tu producción no se interrumpa.</p></details>
+                    <details><summary>¿Cómo funcionan los presupuestos con horario fijo?<span class="plus"></span></summary><p>Elegís la cantidad de horas fijas que necesitás (4, 8 o 12 hs) y te aseguramos un día y horario recurrente durante el período pactado para que tu producción no se interrumpa.</p></details>
                     <details><summary>¿Cuánto cuesta una sesión?<span class="plus"></span></summary><p>Depende del servicio y de la duración. Escribinos con lo que querés grabar y te mandamos un presupuesto.</p></details>
                     <details><summary>¿Cómo reservo?<span class="plus"></span></summary><p>Completá el formulario o escribinos por WhatsApp al 381 510-9595. La reserva queda confirmada cuando te respondemos.</p></details>
                 </div>
